@@ -2,6 +2,12 @@
 template <typename T>
 struct shared_ptr
 {
+public:
+  shared_ptr(T *p)
+  {
+    ptr = p;
+    cnt = 0;
+  }
   T *ptr;
   uint32_t cnt;
 };
