@@ -2,7 +2,7 @@
 cd $(dirname $0)
 PATH=/opt/devkitpro/devkitPPC/bin/:$PATH
 
-powerpc-eabi-gcc -Os -nostdlib -c raw.cpp -o raw.o
+powerpc-eabi-gcc -O0 -nostdlib -c raw.cpp -o raw.o || exit
 powerpc-eabi-objcopy --only-section=.text raw.o -O binary raw.bin
 powerpc-eabi-objdump -d raw.o | c++filt
 hexdump \
