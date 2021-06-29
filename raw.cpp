@@ -1,7 +1,8 @@
 #include "rawFunc.cpp"
+template <typename T>
 struct shared_ptr
 {
-  uint32_t ptr;
+  T *ptr;
   uint32_t cnt;
 };
 struct vector
