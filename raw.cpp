@@ -184,7 +184,12 @@ public:
 class GiveItemCommand
 {
 public:
-  static rawFunc<int, 0x02460e54> preparePacket;
+  static rawFunc<int, 0x02460e54,
+                 shared_ptr<void *> *,
+                 shared_ptr<LocalPlayer> *,
+                 int, int, int,
+                 shared_ptr<void *> *>
+      preparePacket;
 };
 void code()
 {
