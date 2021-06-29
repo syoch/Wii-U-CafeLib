@@ -8,6 +8,11 @@ public:
     ptr = p;
     cnt = 0;
   }
+  shared_ptr()
+  {
+    ptr = 0;
+    cnt = 0;
+  }
   T *ptr;
   uint32_t cnt;
 };
