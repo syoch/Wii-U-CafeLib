@@ -23,6 +23,14 @@ struct vector
   uint32_t field_0x8;
   uint32_t field_0xc;
 };
+class ClientPacketListener
+{
+public:
+  void send(void *packet)
+  {
+    rawFunc<void, 0x0304a5d8, ClientPacketListener *, void *>()(this, packet);
+  }
+};
 struct Minecraft
 {
 public:
