@@ -159,6 +159,11 @@ public:
   static rawFunc<Minecraft *, 0x03166818> getInstance;
 };
 
+class GiveItemCommand
+{
+public:
+  static rawFunc<int, 0x02460e54> preparePacket;
+};
 void code()
 {
   auto mc = Minecraft::getInstance();
