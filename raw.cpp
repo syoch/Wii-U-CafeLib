@@ -31,6 +31,9 @@ public:
     rawFunc<void, 0x0304a5d8, ClientPacketListener *, void *>()(this, packet);
   }
 };
+class LocalPlayer
+{
+};
 struct Minecraft
 {
 public:
