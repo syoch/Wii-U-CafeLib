@@ -57,7 +57,7 @@ public:
   uint32_t field_0x38;
   uint32_t field_0x3c;
   int playerCount;
-  struct shared_ptr localPlayers[4];
+  struct shared_ptr<LocalPlayer> localPlayers[4];
   uint32_t field_0x64;
   uint32_t field_0x68;
   uint32_t field_0x6c;
@@ -179,6 +179,10 @@ public:
   uint32_t field_0x260;
   uint32_t field_0x264;
   static rawFunc<Minecraft *, 0x03166818> getInstance;
+  ClientPacketListener *getConnection(int i)
+  {
+    return rawFunc<ClientPacketListener *, 0x031b2654, Minecraft *, int>()(this, i);
+  }
 };
 
 class GiveItemCommand
@@ -193,6 +197,12 @@ public:
 };
 void code()
 {
+  shared_ptr<void *> str;
+  shared_ptr<void *> packet;
+
   auto mc = Minecraft::getInstance();
-  auto player = mc->localPlayers[0].ptr;
+
+  GiveItemCommand::preparePacket(&packet, &mc->localPlayers[0], 1, 64 * 4 * 9, 3, &str);
+
+  mc->getConnection(0)->send(&packet);
 }
