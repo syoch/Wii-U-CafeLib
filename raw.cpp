@@ -34,6 +34,9 @@ public:
 class LocalPlayer
 {
 };
+struct Level
+{
+};
 struct Minecraft
 {
 public:
@@ -55,7 +58,7 @@ public:
   struct LevelRenderer *levelRenderer;
   uint32_t field_0x34;
   uint32_t field_0x38;
-  uint32_t field_0x3c;
+  Level *lvl;
   int playerCount;
   struct shared_ptr<LocalPlayer> localPlayers[4];
   uint32_t field_0x64;
