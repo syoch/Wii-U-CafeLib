@@ -202,7 +202,7 @@ public:
                  shared_ptr<void *> *>
       preparePacket;
 };
-void code()
+extern "C" void code()
 {
   shared_ptr<void *> str;
   shared_ptr<void *> packet;
