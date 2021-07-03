@@ -186,6 +186,10 @@ public:
   {
     return rawFunc<ClientPacketListener *, 0x031b2654, Minecraft *, int>()(this, i);
   }
+  shared_ptr<LocalPlayer> *GetPlayerByPlayerIndex(int idx)
+  {
+    return rawFunc<shared_ptr<LocalPlayer> *, 0x031b3644, Minecraft *, void *, int>()(this, 0, idx);
+  }
 };
 
 class GiveItemCommand
