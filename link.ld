@@ -9,7 +9,10 @@ MEMORY
 SECTIONS{
   .text : 
   {
-      *(.text)
-      *(.rodata.cst4)
-  } > rom,
+    *(.text) 
+    rodata_start = .;
+    *(.rodata.cst4)
+    *(.rodata.cst8)
+    rodata_end = .;
+  } > rom
 }
