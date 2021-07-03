@@ -186,9 +186,9 @@ public:
   {
     return rawFunc<ClientPacketListener *, 0x031b2654, Minecraft *, int>()(this, i);
   }
-  shared_ptr<LocalPlayer> *GetPlayerByPlayerIndex(int idx, shared_ptr<LocalPlayer *> *dest = 0)
+  shared_ptr<LocalPlayer> *GetPlayerByPlayerIndex(int idx, shared_ptr<LocalPlayer> *dest = 0)
   {
-    return rawFunc<shared_ptr<LocalPlayer> *, 0x031b3644, Minecraft *, shared_ptr<LocalPlayer *> *, int>()(this, dest, idx);
+    return rawFunc<shared_ptr<LocalPlayer> *, 0x031b3644, Minecraft *, shared_ptr<LocalPlayer> *, int>()(this, dest, idx);
   }
 };
 
