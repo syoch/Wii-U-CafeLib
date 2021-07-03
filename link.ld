@@ -10,9 +10,16 @@ SECTIONS{
   .text : 
   {
     *(.text) 
+  } > rom
+  .init :
+  {
+    partA = .;
+
     rodata_start = .;
     *(.rodata.cst4)
     *(.rodata.cst8)
     rodata_end = .;
+    
+    partB = .;
   } > rom
 }
