@@ -8,18 +8,16 @@ MEMORY
 
 SECTIONS{
   .text : 
-  {
+  {*(.init) 
     *(.text) 
-  } > rom
-  .init :
-  {
-    partA = .;
+
 
     rodata_start = .;
     *(.rodata.cst4)
     *(.rodata.cst8)
     rodata_end = .;
-    
-    partB = .;
+
+    rodata_size = rodata_end - rodata_start;
+
   } > rom
 }
