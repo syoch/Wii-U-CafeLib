@@ -17,7 +17,5 @@ SECTIONS{
     *(.rodata.cst8)
     rodata_end = .;
 
-    rodata_size = rodata_end - rodata_start;
-
   } > rom
 }
