@@ -8,7 +8,8 @@ MEMORY
 
 SECTIONS{
   .text : 
-  {*(.init) 
+  {
+    *(.init) 
     *(.text) 
 
 
