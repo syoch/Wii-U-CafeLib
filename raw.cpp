@@ -1,6 +1,4 @@
 #include "rawFunc.cpp"
-#include <vector>
-
 template <typename T>
 struct shared_ptr
 {
@@ -209,20 +207,19 @@ public:
 };
 extern "C" void code()
 {
-  *(float *)(4) = 1;
-  return;
   auto mc = Minecraft::getInstance();
 
   auto dest = (uint32_t *)0x20000000;
   // players dump
-  //{
-  //  for (int i = 0; i < 16; i++)
-  //  {
-  //    mc->GetPlayerByPlayerIndex(i, &dest[i]);
-  //  }
-  //  dest[32] = mc->localPlayers[0];
-  //}
-
+  {
+    shared_ptr<LocalPlayer> a;
+    for (int i = 0; i < 16; i++)
+    {
+      mc->GetPlayerByPlayerIndex(i, &a);
+      dest[i] = (uint32_t)a.ptr;
+    }
+    dest[32] = (uint32_t)mc->localPlayers[0].ptr;
+  }
   shared_ptr<void *> str;
   shared_ptr<void *> packet;
   shared_ptr<LocalPlayer> player;
