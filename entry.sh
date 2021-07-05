@@ -13,7 +13,6 @@ powerpc-eabi-gcc \
 powerpc-eabi-objcopy --only-section=.text raw.o -O binary text.bin
 powerpc-eabi-objcopy --only-section=.data raw.o -O binary data.bin
 powerpc-eabi-objdump \
-  --section=.init \
   --section=.text \
   -d raw.o
 hexdump \
