@@ -17,7 +17,7 @@ powerpc-eabi-objdump \
   -d raw.o
 hexdump \
   -e '4/1 "%02x" " " 4/1 "%02x" "\n"' \
-  text.bin data.bin | tee dump
+  text.bin data.bin > dump
 cat dump | xsel --clipboard --input
 rm dump
 rm text.bin data.bin
