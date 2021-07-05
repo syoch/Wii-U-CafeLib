@@ -10,7 +10,8 @@ init:
   srwi 8, 8, 2
   mtctr 8
 
-  bl getPC
+  bl 4
+  mflr 3
   addi 9, 3, rodata_start - . - 4
 
   lis 8, 0x1FFF
@@ -24,8 +25,3 @@ init:
   addi    1,1,8
   mtlr    0
   blr
-
-.global getPC
-getPC:
-    mflr 3
-    blr
