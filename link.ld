@@ -18,6 +18,7 @@ SECTIONS{
   } > ram,
   .text : 
   {
+    *(.code) 
     *(.init) 
     *(.text)
     text_end = .;

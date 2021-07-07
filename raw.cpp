@@ -205,7 +205,7 @@ public:
                  shared_ptr<void *> *>
       preparePacket;
 };
-extern "C" void code()
+extern "C" __attribute__((section(".code"))) void code()
 {
   auto mc = Minecraft::getInstance();
 
