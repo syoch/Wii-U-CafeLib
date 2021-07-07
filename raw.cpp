@@ -1,48 +1,35 @@
 #include "rawFunc.cpp"
 template <typename T>
-struct shared_ptr
-{
-public:
-  shared_ptr(T *p)
-  {
+struct shared_ptr {
+ public:
+  shared_ptr(T *p) {
     ptr = p;
     cnt = 0;
   }
-  shared_ptr()
-  {
+  shared_ptr() {
     ptr = 0;
     cnt = 0;
   }
   T *ptr;
   uint32_t cnt;
 };
-struct vector
-{
+struct vector {
   uint32_t field_0x0;
   uint32_t field_0x4;
   uint32_t field_0x8;
   uint32_t field_0xc;
 };
-class ClientPacketListener
-{
-public:
-  void send(void *packet)
-  {
+class ClientPacketListener {
+ public:
+  void send(void *packet) {
     rawFunc<void, 0x0304a5d8, ClientPacketListener *, void *>()(this, packet);
   }
 };
-class Player
-{
-};
-class LocalPlayer
-{
-};
-struct Level
-{
-};
-struct Minecraft
-{
-public:
+class Player {};
+class LocalPlayer {};
+struct Level {};
+struct Minecraft {
+ public:
   struct FixerUpper *fixerupper;
   uint32_t field_0x4;
   uint8_t field_0x8;
@@ -178,35 +165,33 @@ public:
   struct vector w_vec1;
   struct vector w_vec2;
   struct MiniGameDef *minigame;
-  struct CommonMasterGameMode *clientMasterGameMode; /* Created by retype action */
+  struct CommonMasterGameMode
+      *clientMasterGameMode; /* Created by retype action */
   uint32_t field_0x254;
   uint32_t field_0x258;
   uint32_t field_0x25c;
   uint32_t field_0x260;
   uint32_t field_0x264;
   static rawFunc<Minecraft *, 0x03166818> getInstance;
-  ClientPacketListener *getConnection(int i)
-  {
-    return rawFunc<ClientPacketListener *, 0x031b2654, Minecraft *, int>()(this, i);
+  ClientPacketListener *getConnection(int i) {
+    return rawFunc<ClientPacketListener *, 0x031b2654, Minecraft *, int>()(this,
+                                                                           i);
   }
-  shared_ptr<LocalPlayer> *GetPlayerByPlayerIndex(int idx, shared_ptr<LocalPlayer> *dest = 0)
-  {
-    return rawFunc<shared_ptr<LocalPlayer> *, 0x031b3644, Minecraft *, shared_ptr<LocalPlayer> *, int>()(this, dest, idx);
+  shared_ptr<LocalPlayer> *GetPlayerByPlayerIndex(
+      int idx, shared_ptr<LocalPlayer> *dest = 0) {
+    return rawFunc<shared_ptr<LocalPlayer> *, 0x031b3644, Minecraft *,
+                   shared_ptr<LocalPlayer> *, int>()(this, dest, idx);
   }
 };
 
-class GiveItemCommand
-{
-public:
-  static rawFunc<int, 0x02460e54,
-                 shared_ptr<void *> *,
-                 shared_ptr<LocalPlayer> *,
-                 int, int, int,
-                 shared_ptr<void *> *>
+class GiveItemCommand {
+ public:
+  static rawFunc<int, 0x02460e54, shared_ptr<void *> *,
+                 shared_ptr<LocalPlayer> *, int, int, int, shared_ptr<void *> *>
       preparePacket;
 };
-extern "C" __attribute__((section(".code"))) void code()
-{
+extern "C" __attribute__((section(".code"))) void code() {
+  *(uint32_t *)(0x20000000) = 1;
   return;
   auto mc = Minecraft::getInstance();
 
@@ -214,8 +199,7 @@ extern "C" __attribute__((section(".code"))) void code()
   // players dump
   {
     shared_ptr<LocalPlayer> a;
-    for (int i = 0; i < 16; i++)
-    {
+    for (int i = 0; i < 16; i++) {
       mc->GetPlayerByPlayerIndex(i, &a);
       dest[i] = (uint32_t)a.ptr;
     }
@@ -226,11 +210,7 @@ extern "C" __attribute__((section(".code"))) void code()
   shared_ptr<LocalPlayer> player;
   mc->GetPlayerByPlayerIndex(1, &player);
   dest[0] = (uint32_t)player.ptr;
-  GiveItemCommand::preparePacket(
-      &packet,
-      &player,
-      1, 64 * 5 * 9, 3,
-      &str);
+  GiveItemCommand::preparePacket(&packet, &player, 1, 64 * 5 * 9, 3, &str);
   dest[1] = (uint32_t)&packet;
 
   mc->getConnection(0)->send(&packet);
