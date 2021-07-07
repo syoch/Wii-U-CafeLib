@@ -20,7 +20,6 @@ init:
     stwu 7, 4(8)
     bdnz loop
 
-  bl code
   addi    1,1,8
   mtlr    0
   blr
