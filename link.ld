@@ -18,6 +18,7 @@ SECTIONS{
   } > ram,
   .text : 
   {
+    *(.startup) 
     *(.code) 
     *(.init) 
     *(.text)

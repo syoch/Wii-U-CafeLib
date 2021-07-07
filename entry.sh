@@ -5,7 +5,7 @@ PATH=/opt/devkitpro/devkitPPC/bin/:$PATH
 powerpc-eabi-gcc \
   -nostdlib \
   -O3 \
-  raw.cpp init.s \
+  raw.cpp init.s init.c \
   -Wl,-T,link.ld \
   -o raw.o \
 || exit
