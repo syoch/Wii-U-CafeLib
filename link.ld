@@ -12,8 +12,7 @@ SECTIONS{
   .data :
   {
     rodata_start = .;
-    *(.rodata.cst4)
-    *(.rodata.cst8)
+    *(.rodata.*)
     rodata_end = .;
   } > ram,
   .text : 
