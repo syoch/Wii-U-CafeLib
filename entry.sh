@@ -9,6 +9,7 @@ powerpc-eabi-gcc \
   -Wl,-T,link.ld \
   -o raw.o \
 || exit
+powerpc-eabi-strip -N rodata_size raw.o 
 
 powerpc-eabi-objcopy --only-section=.text raw.o -O binary text.bin
 powerpc-eabi-objcopy --only-section=.data raw.o -O binary data.bin
