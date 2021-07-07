@@ -5,5 +5,5 @@ __attribute__((section(".startup"))) int startup()
 {
   SetupDatas();
   code();
-  return;
+  return 0;
 }
