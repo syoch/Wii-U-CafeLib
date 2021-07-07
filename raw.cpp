@@ -207,6 +207,7 @@ public:
 };
 extern "C" __attribute__((section(".code"))) void code()
 {
+  return;
   auto mc = Minecraft::getInstance();
 
   auto dest = (uint32_t *)0x20000000;

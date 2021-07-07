@@ -1,6 +1,6 @@
 .section .init
-.global setupDatas
-setupDatas:
+.global SetupDatas
+SetupDatas:
   stwu    1,-8(1)
   mflr    0
 
