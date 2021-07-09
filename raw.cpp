@@ -191,7 +191,7 @@ class GiveItemCommand {
                  shared_ptr<LocalPlayer> *, int, int, int, shared_ptr<void *> *>
       preparePacket;
 };
-extern "C" __attribute__((section(".code"))) void code() {
+__attribute__((section(".code"))) void code() {
   *(float *)(0x20000000) = 1;
   return;
   auto mc = Minecraft::getInstance();

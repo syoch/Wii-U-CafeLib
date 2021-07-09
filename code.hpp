@@ -1,7 +1,7 @@
 #include <inttypes.h>
 #include <stddef.h>
 
-extern "C" void code();
+void code();
 extern "C" uint32_t rodata_size;
 
 extern "C" __attribute__((section(".startup"))) int startup() {
