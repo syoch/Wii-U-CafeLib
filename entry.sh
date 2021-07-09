@@ -5,7 +5,7 @@ PATH=/opt/devkitpro/devkitPPC/bin/:$PATH
 powerpc-eabi-gcc \
   -nostdlib \
   -Os -fno-unroll-loops \
-  raw.cpp init.c \
+  raw.cpp \
   -Wl,-T,link.ld \
   -o raw.o \
 || exit

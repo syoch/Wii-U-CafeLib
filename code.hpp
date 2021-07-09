@@ -1,8 +1,8 @@
 #include <inttypes.h>
 #include <stdlib.h>
 
-void code();
-extern void rodata_size;
+extern "C" void code();
+extern "C" uint32_t rodata_size;
 
 __attribute__((section(".startup"))) int startup() {
   register uint32_t* src;
@@ -18,7 +18,7 @@ __attribute__((section(".startup"))) int startup() {
       : [src] "r"(src)
       : "lr");
   dest = (uint32_t*)(0x20000000) - 1;
-  size = (uint32_t*)(&rodata_size);
+  size = (size_t)(&rodata_size);
 
   // copy to 2000_0000h
   asm volatile(

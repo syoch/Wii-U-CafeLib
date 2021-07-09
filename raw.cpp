@@ -1,3 +1,4 @@
+#include "code.hpp"
 #include "rawFunc.cpp"
 template <typename T>
 struct shared_ptr {
@@ -191,7 +192,7 @@ class GiveItemCommand {
       preparePacket;
 };
 extern "C" __attribute__((section(".code"))) void code() {
-  *(uint32_t *)(0x20000000) = 1;
+  *(float *)(0x20000000) = 1;
   return;
   auto mc = Minecraft::getInstance();
 
