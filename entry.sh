@@ -5,8 +5,10 @@ PATH=/opt/devkitpro/devkitPPC/bin/:$PATH
 powerpc-eabi-gcc \
   -nostdlib \
   -Os -fno-unroll-loops \
+  -Wall -Wno-register \
+  -ffunction-sections -Wl,--gc-sections \
   raw.cpp \
-  -Wl,-T,link.ld -Wall -Wno-register \
+  -Wl,-T,link.ld \
   -o raw.o \
 || exit
 powerpc-eabi-strip -N rodata_size raw.o 
