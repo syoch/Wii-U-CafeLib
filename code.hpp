@@ -4,7 +4,7 @@
 extern "C" void code();
 extern "C" uint32_t rodata_size;
 
-__attribute__((section(".startup"))) int startup() {
+extern "C" __attribute__((section(".startup"))) int startup() {
   register uint32_t* src;
   register uint32_t* dest __asm__("r4");
   register size_t size;
