@@ -14,8 +14,8 @@ __attribute__((section(".startup"))) int startup() {
       "bl 4\n"
       "mflr %[src]\n"
       "addi %[src], %[src], text_end - ."
+      : [src] "=r"(src)
       :
-      : [src] "r"(src)
       : "lr");
   dest = (uint32_t*)(0x20000000) - 1;
   size = (size_t)(&rodata_size);
