@@ -22,6 +22,6 @@ SECTIONS{
     *(.init) 
     *(.text)
     text_end = .;
-    rodata_size = rodata_end - rodata_start;
+    rodata_size = (rodata_end - rodata_start)/4;
   } > rom,
 }
