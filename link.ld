@@ -1,5 +1,5 @@
 OUTPUT_ARCH(powerpc)
-ENTRY(code)
+ENTRY(startup)
 
 MEMORY
 {
