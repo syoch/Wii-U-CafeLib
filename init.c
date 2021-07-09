@@ -2,9 +2,6 @@
 #include <stdlib.h>
 
 void code();
-uint32_t* GetTextEnd();
-extern const void* rodata_start;
-extern const void* rodata_end;
 extern void rodata_size;
 
 __attribute__((section(".startup"))) int startup() {
