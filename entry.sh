@@ -32,4 +32,7 @@ hexdump \
 cat dump | xsel --clipboard --input
 rm dump
 
+
+# rm temp files
+rm raw.o code.bin
 exit
