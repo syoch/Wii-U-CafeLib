@@ -1,6 +1,8 @@
 #include <inttypes.h>
 #include <stddef.h>
 
+#include "rawFunc.hpp"
+
 void code();
 extern "C" uint32_t rodata_size;
 
