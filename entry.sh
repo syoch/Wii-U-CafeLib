@@ -2,6 +2,7 @@
 cd $(dirname $0)
 PATH=/opt/devkitpro/devkitPPC/bin/:$PATH
 
+# compile
 powerpc-eabi-gcc \
   -nostdlib \
   -Os -fno-unroll-loops \
@@ -13,15 +14,22 @@ powerpc-eabi-gcc \
 || exit
 powerpc-eabi-strip -N rodata_size raw.o 
 
-powerpc-eabi-objcopy --only-section=.text raw.o -O binary text.bin
-powerpc-eabi-objcopy --only-section=.data raw.o -O binary data.bin
+# debug
 powerpc-eabi-objdump \
   --section=.text \
   -d raw.o
+
+# make code.bin
+powerpc-eabi-objcopy --only-section=.text raw.o -O binary text.bin
+powerpc-eabi-objcopy --only-section=.data raw.o -O binary data.bin
+cat text.bin data.bin > code.bin
+rm text.bin data.bin
+
+# make hex
 hexdump \
   -e '4/1 "%02x" " " 4/1 "%02x" "\n"' \
-  text.bin data.bin > dump
+  code.bin > dump
 cat dump | xsel --clipboard --input
 rm dump
-rm text.bin data.bin
+
 exit
