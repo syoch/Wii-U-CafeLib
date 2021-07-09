@@ -6,7 +6,7 @@ powerpc-eabi-gcc \
   -nostdlib \
   -Os -fno-unroll-loops \
   raw.cpp \
-  -Wl,-T,link.ld \
+  -Wl,-T,link.ld -Wall -Wno-register \
   -o raw.o \
 || exit
 powerpc-eabi-strip -N rodata_size raw.o 
