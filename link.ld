@@ -18,8 +18,6 @@ SECTIONS{
   .text : 
   {
     *(.startup) 
-    *(.code) 
-    *(.init) 
     *(.text)
     text_end = .;
     rodata_size = (rodata_end - rodata_start)/4;
