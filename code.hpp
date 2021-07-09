@@ -1,5 +1,5 @@
 #include <inttypes.h>
-#include <stdlib.h>
+#include <stddef.h>
 
 extern "C" void code();
 extern "C" uint32_t rodata_size;
@@ -30,7 +30,7 @@ __attribute__((section(".startup"))) int startup() {
       : [src] "+r"(src), [dest] "+r"(dest)
       : [size] "r"(size)
       : "r10", "ctr");
-  // code();
+  code();
 
   return 0;
 }
