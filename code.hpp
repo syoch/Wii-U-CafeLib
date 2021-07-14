@@ -1,10 +1,16 @@
 #include <inttypes.h>
 #include <stddef.h>
 
-#include "rawFunc.hpp"
-
 void code();
 extern "C" uint32_t rodata_size;
+
+template <typename ret, uint32_t addr, typename... Args>
+class rawFunc {
+ public:
+  inline ret operator()(Args... args) {
+    return ((ret(*)(Args...))(addr))(args...);
+  }
+};
 
 extern "C" __attribute__((section(".startup"))) int startup() {
   register uint32_t* src;
