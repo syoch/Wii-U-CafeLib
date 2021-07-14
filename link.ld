@@ -3,8 +3,8 @@ ENTRY(startup)
 
 MEMORY
 {
-  rom(rxai) : ORIGIN = 0x00000000, LENGTH = 16k
-  ram(rwai) : ORIGIN = 0x20000000, LENGTH = 16k
+  rom(rxai) : ORIGIN = 0x00000000, LENGTH = 16m
+  ram(rwai) : ORIGIN = 0x20000000, LENGTH = 16m
 }
 
 SECTIONS{
