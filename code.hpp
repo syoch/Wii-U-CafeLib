@@ -1,8 +1,11 @@
 #include <inttypes.h>
 #include <stddef.h>
 
+#include <cstddef>
+
 void code();
 extern "C" uint32_t rodata_size;
+extern "C" uint32_t rodata_start;
 
 template <typename ret, uint32_t addr, typename... Args>
 class rawFunc {
@@ -11,7 +14,6 @@ class rawFunc {
     return ((ret(*)(Args...))(addr))(args...);
   }
 };
-
 extern "C" __attribute__((section(".startup"))) int startup() {
   register uint32_t* src;
   register uint32_t* dest __asm__("r4");
@@ -25,7 +27,7 @@ extern "C" __attribute__((section(".startup"))) int startup() {
       : [src] "=r"(src)
       :
       : "lr");
-  dest = (uint32_t*)(0x20000000) - 1;
+  dest = (uint32_t*)(&rodata_start) - 1;
   size = (size_t)(&rodata_size);
 
   // copy to 2000_0000h
