@@ -14,6 +14,9 @@ powerpc-eabi-gcc \
 || exit
 powerpc-eabi-strip -N rodata_size raw.o 
 
+# list up all section headers
+powerpc-eabi-objdump -h raw.o
+
 # debug
 powerpc-eabi-objdump \
   --section=.text \
