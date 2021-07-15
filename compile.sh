@@ -13,6 +13,7 @@ powerpc-eabi-gcc \
   -o raw.o \
 || exit
 powerpc-eabi-strip -N rodata_size raw.o 
+powerpc-eabi-strip -N Loop1 raw.o 
 
 # list up all section headers
 echo "----- headers -----"

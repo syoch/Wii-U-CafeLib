@@ -34,6 +34,7 @@ __attribute__((section(".startup"))) int startup() {
       : [src] "+r"(src), [dest] "+r"(dest)
       : [size] "r"(size)
       : "r10", "ctr");
+  asm volatile("code:");
   code();
 
   return 0;
