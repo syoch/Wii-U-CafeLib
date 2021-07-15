@@ -15,9 +15,11 @@ powerpc-eabi-gcc \
 powerpc-eabi-strip -N rodata_size raw.o 
 
 # list up all section headers
+echo "----- headers -----"
 powerpc-eabi-objdump -h raw.o
 
 # debug
+echo "----- disassembly -----"
 powerpc-eabi-objdump \
   --section=.text \
   -d raw.o
@@ -26,16 +28,22 @@ powerpc-eabi-objdump \
 powerpc-eabi-objcopy --only-section=.text raw.o -O binary text.bin
 powerpc-eabi-objcopy --only-section=.data raw.o -O binary data.bin
 cat text.bin data.bin > code.bin
-rm text.bin data.bin
+
+# print out data section
+echo "----- data section -----"
+hexdump \
+  -e '4/1 "%02x" " " 4/1 "%02x" "\n"' \
+  data.bin > dump
 
 # make hex
 hexdump \
   -e '4/1 "%02x" " " 4/1 "%02x" "\n"' \
   code.bin > dump
 cat dump | xsel --clipboard --input
-rm dump
 
 
 # rm temp files
+rm text.bin data.bin
+rm dump
 rm raw.o code.bin
 exit
