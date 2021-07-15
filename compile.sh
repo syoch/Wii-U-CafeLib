@@ -33,7 +33,7 @@ cat text.bin data.bin > code.bin
 echo "----- data section -----"
 hexdump \
   -e '4/1 "%02x" " " 4/1 "%02x" "\n"' \
-  data.bin > dump
+  data.bin
 
 # make hex
 hexdump \
