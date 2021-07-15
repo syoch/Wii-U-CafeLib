@@ -13,6 +13,7 @@ SECTIONS{
   {
     rodata_start = .;
     *(.rodata.*)
+    *(.sdata.*)
     rodata_end = .;
   } > ram,
   .text : 
