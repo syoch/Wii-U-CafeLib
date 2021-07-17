@@ -8,35 +8,39 @@ extern "C" {
 uint32_t rodata_size;
 uint32_t rodata_start;
 
+inline void words_copy(uint32_t* src, uint32_t* dest, size_t size) {
+  asm volatile("copy:");
+  for (register size_t i = size; i != 0; --i) {
+    *(++dest) = *(++src);
+  }
+}
 __attribute__((section(".startup"))) int startup() {
   register uint32_t* src;
   register uint32_t* dest __asm__("r4");
   register size_t size;
 
-  // get data start
+  // set some data pointers
   asm volatile(
+      "__get_dest:"
+      "lis %[dest], (rodata_start-4)@h\n"
+      "ori %[dest], %[dest], (rodata_start-4)@l\n"
+
+      "__get_size:"
+      "li %[size], rodata_size\n"
+
+      "__get_src:"
       "bl 4\n"
       "mflr %[src]\n"
-      "addi %[src], %[src], text_end - ."
-      : [src] "=r"(src)
+      "addi %[src], %[src], text_end - . - 4"
+
+      : [dest] "=r"(dest), [size] "=r"(size), [src] "=r"(src)
       :
       : "lr");
-  dest = (uint32_t*)(&rodata_start) - 1;
-  size = (size_t)(&rodata_size);
-
-  // copy to 2000_0000h
-  asm volatile(
-      "mtctr %[size]\n"
-      "Loop1:\n"
-      "  lwzu 10, 4(%[src])\n"
-      "  stwu 10, 4(%[dest])\n"
-      "  bdnz Loop1"
-      : [src] "+r"(src), [dest] "+r"(dest)
-      : [size] "r"(size)
-      : "r10", "ctr");
+  // copy src to dest
+  words_copy(src, dest, size);
   asm volatile("code:");
   code();
-
+  asm volatile("code_end:");
   return 0;
 }
 }
