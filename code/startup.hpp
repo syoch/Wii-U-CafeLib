@@ -2,18 +2,14 @@
 
 #include <cstddef>
 
+#include "memcpy.hpp"
+
 void code();
 
 extern "C" {
 uint32_t rodata_size;
 uint32_t rodata_start;
 
-inline void words_copy(uint32_t* src, uint32_t* dest, size_t size) {
-  asm volatile("copy:");
-  for (register size_t i = size; i != 0; --i) {
-    *(++dest) = *(++src);
-  }
-}
 __attribute__((section(".startup"))) int startup() {
   register uint32_t* src;
   register uint32_t* dest __asm__("r4");
