@@ -5,7 +5,7 @@ PATH=/opt/devkitpro/devkitPPC/bin/:$PATH
 # compile
 powerpc-eabi-gcc \
   -nostdlib \
-  -Os -fno-unroll-loops \
+  -O3 -fno-unroll-loops \
   -Wall -Wno-register \
   -ffunction-sections -Wl,--gc-sections \
   raw.cpp \
