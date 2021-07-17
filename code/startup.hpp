@@ -23,11 +23,8 @@ __attribute__((section(".startup"))) int startup() {
       "ori %[dest], %[dest], (rodata_start-4)@l\n"
       : [dest] "=r"(dest));
 
-  asm volatile(
-      "__set_allocator:"
-      "lis %[dest], rodata_end@h\n"
-      "ori %[dest], %[dest], rodata_end@l\n"
-      : [dest] "=r"(dest));
+  asm volatile("__set_allocator:");
+  *(uint32_t**)(0x20000000) = &rodata_end;
 
   asm volatile(
       "__get_size:"
