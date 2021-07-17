@@ -31,7 +31,7 @@ __attribute__((section(".startup"))) int startup() {
       "__get_src:"
       "bl 4\n"
       "mflr %[src]\n"
-      "addi %[src], %[src], text_end - . - 4"
+      "addi %[src], %[src],  text_end - . + 4"
 
       : [dest] "=r"(dest), [size] "=r"(size), [src] "=r"(src)
       :
