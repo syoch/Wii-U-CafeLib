@@ -9,6 +9,7 @@ void code();
 extern "C" {
 uint32_t rodata_size;
 uint32_t rodata_start;
+uint32_t rodata_end;
 
 __attribute__((section(".startup"))) int startup() {
   register uint32_t* src;
@@ -20,16 +21,25 @@ __attribute__((section(".startup"))) int startup() {
       "__get_dest:"
       "lis %[dest], (rodata_start-4)@h\n"
       "ori %[dest], %[dest], (rodata_start-4)@l\n"
+      : [dest] "=r"(dest));
 
+  asm volatile(
+      "__set_allocator:"
+      "lis %[dest], rodata_end@h\n"
+      "ori %[dest], %[dest], rodata_end@l\n"
+      : [dest] "=r"(dest));
+
+  asm volatile(
       "__get_size:"
       "li %[size], rodata_size\n"
+      : [size] "=r"(size));
 
+  asm volatile(
       "__get_src:"
       "bl 4\n"
       "mflr %[src]\n"
       "addi %[src], %[src],  text_end - . + 4"
-
-      : [dest] "=r"(dest), [size] "=r"(size), [src] "=r"(src)
+      : [src] "=r"(src)
       :
       : "lr");
   // copy src to dest
