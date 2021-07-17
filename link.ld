@@ -12,8 +12,9 @@ SECTIONS{
   .data :
   {
     rodata_start = .;
-    *(.rodata.*)
+    *(.sdata._ZZnwjE3ptr)
     *(.sdata.*)
+    *(.rodata.*)
     rodata_end = .;
   } > ram,
   .text : 
