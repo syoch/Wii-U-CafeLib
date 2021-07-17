@@ -17,22 +17,19 @@ __attribute__((section(".startup"))) int startup() {
   register size_t size;
 
   // set some data pointers
+  // set dest
   asm volatile(
-      "__get_dest:"
       "lis %[dest], (rodata_start-4)@h\n"
       "ori %[dest], %[dest], (rodata_start-4)@l\n"
       : [dest] "=r"(dest));
-
-  asm volatile("__set_allocator:");
+  // set allocator
   *(uint32_t**)(0x20000000) = &rodata_end;
 
-  asm volatile(
-      "__get_size:"
-      "li %[size], rodata_size\n"
-      : [size] "=r"(size));
+  // get size
+  asm volatile("li %[size], rodata_size\n" : [size] "=r"(size));
 
+  // get src
   asm volatile(
-      "__get_src:"
       "bl 4\n"
       "mflr %[src]\n"
       "addi %[src], %[src],  text_end - . + 4"
@@ -40,7 +37,6 @@ __attribute__((section(".startup"))) int startup() {
       :
       : "lr");
   // copy src to dest
-  asm volatile("copy:");
   memcpy(src, dest, size);
   asm volatile("code:");
   code();
