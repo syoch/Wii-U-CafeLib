@@ -33,7 +33,7 @@ __attribute__((section(".startup"))) int startup() {
       :
       : "lr");
   // copy src to dest
-  words_copy(src, dest, size);
+  memcpy(src, dest, size);
   asm volatile("code:");
   code();
   asm volatile("code_end:");

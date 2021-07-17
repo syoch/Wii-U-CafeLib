@@ -2,9 +2,9 @@
 
 #include <cstddef>
 
-inline void words_copy(uint32_t* src, uint32_t* dest, size_t size) {
-  asm volatile("copy:");
-  for (register size_t i = size; i != 0; --i) {
+template <typename T>
+inline void memcpy(T* src, T* dest, size_t count) {
+  for (register size_t i = count; i != 0; --i) {
     *(++dest) = *(++src);
   }
 }
