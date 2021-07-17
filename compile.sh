@@ -44,7 +44,7 @@ cat dump | xsel --clipboard --input
 
 
 # rm temp files
-rm text.bin data.bin
+rm text.bin data.bin code.bin
 rm dump
-rm raw.o code.bin
+rm raw.o
 exit
