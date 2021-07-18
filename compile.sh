@@ -15,6 +15,9 @@ powerpc-eabi-gcc \
 powerpc-eabi-strip -N rodata_size raw.o 
 powerpc-eabi-strip -N Loop1 raw.o 
 
+echo "----- symbols -----"
+nm raw.o
+
 # list up all section headers
 echo "----- headers -----"
 powerpc-eabi-objdump -h raw.o
