@@ -10,8 +10,7 @@ extern "C" {
 uint32_t rodata_size;
 uint32_t rodata_start;
 uint32_t rodata_end;
-
-__attribute__((section(".startup"))) int startup() {
+void copy_data() {
   register uint32_t* src;
   register uint32_t* dest __asm__("r4");
   register size_t size;
@@ -32,10 +31,16 @@ __attribute__((section(".startup"))) int startup() {
 
   // copy src to dest
   memcpy(src, dest, size);
+}
+__attribute__((section(".startup"))) int startup() {
+  if (&rodata_start != &rodata_end) {
+    copy_data();
+  }
 
   asm volatile("_startup_main:");
   code();
   asm volatile("_startup_main_end:");
+
   return 0;
 }
 }
