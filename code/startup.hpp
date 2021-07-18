@@ -33,14 +33,9 @@ void copy_data() {
   memcpy(src, dest, size);
 }
 __attribute__((section(".startup"))) int startup() {
-  if (&rodata_start != &rodata_end) {
-    copy_data();
-  }
+  copy_data();
 
   asm volatile("_startup_main:");
   code();
-  asm volatile("_startup_main_end:");
-
-  return 0;
 }
 }
