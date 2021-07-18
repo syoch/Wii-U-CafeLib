@@ -13,6 +13,7 @@ SECTIONS{
   {
     rodata_start = .;
     *(.sdata._ZZnwjE3ptr)
+    *(.sdata)
     *(.sdata.*)
     *(.rodata.*)
     rodata_end = .;
