@@ -32,7 +32,7 @@ __attribute__((section(".startup"))) int startup() {
   asm volatile(
       "bl 4\n"
       "mflr %[src]\n"
-      "addi %[src], %[src],  text_end - . + 4"
+      "addi %[src], %[src],  text_end - ."
       : [src] "=r"(src)
       :
       : "lr");
