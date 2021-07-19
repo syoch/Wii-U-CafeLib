@@ -33,9 +33,11 @@ void copy_data() {
   memcpy(src, dest, size);
 }
 __attribute__((section(".startup"))) int startup() {
-  copy_data();
+  // copy data
+  if constexpr (&rodata_start != &rodata_end) copy_data();
 
   asm volatile("_startup_main:");
   code();
+  asm volatile("_startup_main_end:");
 }
 }
