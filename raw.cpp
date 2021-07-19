@@ -1,9 +1,8 @@
 #include "code.hpp"
+#include "libs/mc.hpp"
 
-inline void code() {
-  *(new int) = 1;
-  asm volatile("code_:");
-  *(new float) = 1;
-  // *(new uint32_t) = 1;
-  return;
+void code() {
+  uint32_t* mem = (uint32_t*)(0x20000000);
+  auto mc = (Minecraft*)(0x109CD8E4);
+  mem[0] = (uint32_t)mc->getConnection(0);
 }
