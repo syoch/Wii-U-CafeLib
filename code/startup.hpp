@@ -39,5 +39,6 @@ __attribute__((section(".startup"))) int startup() {
   asm volatile("_startup_main:");
   code();
   asm volatile("_startup_main_end:");
+  return 0;
 }
 }
