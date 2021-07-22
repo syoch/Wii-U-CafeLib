@@ -17,14 +17,14 @@ void copy_data() {
 
   // set some data pointers
   size = (size_t)&rodata_size;              // get size
-  dest = (uint32_t*)&rodata_start - 1;      // set dest
+  dest = (uint32_t*)&rodata_start;          // set dest
   *(uint32_t**)(0x20000000) = &rodata_end;  // set allocator
 
   // get src
   asm volatile(
       "bl 4\n"
       "mflr %[src]\n"
-      "addi %[src], %[src],  text_end - ."
+      "addi %[src], %[src],  text_end - . + 4"
       : [src] "=r"(src)
       :
       : "lr");
