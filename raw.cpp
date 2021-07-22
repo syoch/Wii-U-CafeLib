@@ -1,7 +1,7 @@
 #include "code.hpp"
 #include "libs/mc.hpp"
 
-void code() {
+__attribute__((always_inline)) void code() {
   shared_ptr<void *> str;
   shared_ptr<void *> packet;
   shared_ptr<LocalPlayer> player;
