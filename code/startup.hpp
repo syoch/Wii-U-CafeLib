@@ -12,12 +12,6 @@ uint32_t rodata_start;
 uint32_t rodata_end;
 void copy_data() {
   register uint32_t* src;
-  register uint32_t* dest __asm__("r4");
-  register size_t size;
-
-  // set some data pointers
-  size = (size_t)&rodata_size;      // get size
-  dest = (uint32_t*)&rodata_start;  // set dest
 
   // get src
   asm volatile(
@@ -29,7 +23,7 @@ void copy_data() {
       : "lr");
 
   // copy src to dest
-  memcpy(src, dest, size);
+  memcpy(src, (uint32_t*)&rodata_start, (size_t)&rodata_size);
 }
 __attribute__((section(".startup"))) int startup() {
   // copy data
