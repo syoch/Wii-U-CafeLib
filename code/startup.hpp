@@ -16,9 +16,8 @@ void copy_data() {
   register size_t size;
 
   // set some data pointers
-  size = (size_t)&rodata_size;              // get size
-  dest = (uint32_t*)&rodata_start;          // set dest
-  *(uint32_t**)(0x20000000) = &rodata_end;  // set allocator
+  size = (size_t)&rodata_size;      // get size
+  dest = (uint32_t*)&rodata_start;  // set dest
 
   // get src
   asm volatile(
