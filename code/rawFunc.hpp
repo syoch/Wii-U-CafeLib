@@ -1,3 +1,4 @@
+#pragma once
 #include <inttypes.h>
 
 template <typename ret, uint32_t addr, typename... Args>
