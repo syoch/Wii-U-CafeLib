@@ -8,6 +8,7 @@ powerpc-eabi-gcc \
   -O3 -fno-unroll-loops \
   -Wall -Wno-register \
   -ffunction-sections -Wl,--gc-sections \
+  -I . \
   raw.cpp \
   -Wl,-T,link.ld \
   -o raw.o \
