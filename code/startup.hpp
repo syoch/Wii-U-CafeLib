@@ -1,8 +1,8 @@
-#include <inttypes.h>
-
-#include <cstddef>
-
+#pragma once
 #include "memcpy.hpp"
+
+using uint32_t = unsigned int;
+using size_t = uint32_t;
 
 void code();
 
@@ -27,7 +27,7 @@ void copy_data() {
 }
 __attribute__((section(".startup"))) int startup() {
   // copy data
-  if constexpr (&rodata_start != &rodata_end) copy_data();
+  // if constexpr (&rodata_start != &rodata_end) copy_data();
 
   asm volatile("_startup_main:");
   code();

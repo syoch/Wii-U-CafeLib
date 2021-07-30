@@ -1,6 +1,7 @@
-#include <inttypes.h>
+#pragma once
 
-#include <cstddef>
+using uint32_t = unsigned int;
+using size_t = uint32_t;
 
 extern "C" uint32_t rodata_end;
 struct {

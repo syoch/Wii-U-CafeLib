@@ -1,5 +1,5 @@
 #pragma once
-#include <inttypes.h>
+using uint32_t = unsigned int;
 
 template <typename ret, uint32_t addr, typename... Args>
 class rawFunc {

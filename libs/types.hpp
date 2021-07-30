@@ -1,4 +1,7 @@
-#include <inttypes.h>
+#pragma once
+using uint8_t = unsigned char;
+using uint32_t = unsigned int;
+using size_t = uint32_t;
 
 template <typename T>
 struct shared_ptr {

@@ -1,6 +1,5 @@
-#include <inttypes.h>
-
-#include <cstddef>
+#pragma once
+using size_t = uint32_t;
 
 template <typename T>
 inline void memcpy(T* src, T* dest, const size_t count) {
