@@ -21,7 +21,11 @@ class ClientPacketListener {
 };
 class Player {};
 class LocalPlayer {};
-struct Level {};
+struct Level {
+ public:
+  void destroyBlock(BlockPos &pos, int a) { destroyBlock_(this, pos, a); }
+  static rawFunc<void, 0x0254b014, Level *, BlockPos &, int> destroyBlock_;
+};
 struct Minecraft {
  public:
   struct FixerUpper *fixerupper;
