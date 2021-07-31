@@ -1,6 +1,18 @@
 #include <code/rawFunc.hpp>
 
 #include "types.hpp"
+class Packet {
+  uint64_t time;
+  uint8_t unk_1;
+  uint8_t unk_2;
+  uint8_t unk_3;
+  uint8_t unk_4;
+  void *vtbl;
+};
+class BlockPos {
+ public:
+  uint32_t x, y, z;
+};
 class ClientPacketListener {
  public:
   void send(void *packet) {
