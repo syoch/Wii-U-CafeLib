@@ -11,7 +11,11 @@ class Packet {
 };
 class BlockPos {
  public:
+  BlockPos() { ctor_(this, 0, 0, 0); }
+  BlockPos(int _x, int _y, int _z) { ctor_(this, x, y, z); }
   uint32_t x, y, z;
+
+  static rawFunc<BlockPos *, 0x020c3ad4, BlockPos *, int, int, int> ctor_;
 };
 class ClientPacketListener {
  public:
