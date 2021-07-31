@@ -1,8 +1,9 @@
 #pragma once
-#include "memcpy.hpp"
+#include <inttypes.h>
 
-using uint32_t = unsigned int;
-using size_t = uint32_t;
+#include <cstddef>
+
+#include "memcpy.hpp"
 
 void code();
 

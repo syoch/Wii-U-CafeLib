@@ -1,6 +1,6 @@
 #pragma once
-using size_t = uint32_t;
 
+#include <cstddef>
 template <typename T>
 inline void memcpy(T* src, T* dest, const size_t count) {
   src--;
