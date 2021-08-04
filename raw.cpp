@@ -1,27 +1,58 @@
 #include "code/code.hpp"
 #include "libs/mc.hpp"
-class Entity;
 
-rawFunc<void *, 0x021cd500, void *, shared_ptr<void>, int, int> addEntityPacket;
-rawFunc<void *, 0x0287f8b8, Entity *, Level *> Sheep;
-__attribute__((always_inline)) inline void code() {
+class ClientboundBlockDestructionPacket : public Packet {
+ public:
+  ClientboundBlockDestructionPacket() { ctor(this); }
+  ClientboundBlockDestructionPacket(int a, BlockPos const &pos, int progress) {
+    ctor_pos(this, a, pos, progress);
+  }
+
+  uint32_t unk__1;
+  uint32_t unk__2;
+  uint32_t id;
+  BlockPos pos;
+  uint32_t progress;
+  uint32_t unk__3;
+
+  static rawFunc<void *, 0x021e17e8, ClientboundBlockDestructionPacket *> ctor;
+  static rawFunc<void *, 0x021e18d4, ClientboundBlockDestructionPacket *, int,
+                 BlockPos const &, int>
+      ctor_pos;
+};
+
+inline void main() {
+  ClientPacketListener *listener = Minecraft::getInstance()->getConnection(0);
+
+  // if (r > 5) {
+  //     mc_boost::shared_ptr<mc::Packet>
+  //     packet1(mc::ServerboundMovePlayerPosPacket::__ct(
+  //         nullptr, pos.x, pos.y + 1, 0.0f, pos.z, true, true));
+  //     listener->send(packet1);
+  // }
+  shared_ptr<Packet> packet2(mc::ServerboundPlayerActionPacket::__ct(
+      nullptr, mc::ServerboundPlayerActionPacket::Action::startDestroyBlock,
+      pos, *(mc::Direction **)0x109C46A4, 0));
+
+  listener->send(packet2);
+  return 0;
+  // auto packet = ClientboundBlockDestructionPacket::ctor_pos(
+  //     nullptr, 0, *BlockPos::ctor_(0, 396, 65, -318), 0);
+  // Minecraft::getInstance()->getConnection(0)->send(packet);
+}
+/*
+extern "C" void
+startup() {
   auto mc = Minecraft::getInstance();
 
-  int *a;
-  decltype(a) b;
-  asm volatile("_code_entity_:");
-  b = new int;
-  asm volatile("mr %0, %1" : "=r"(a), "+r"(b));
-  asm volatile("_code_entity_2:");
-  b = new int;
-  asm volatile("mr %0, %1" : "=r"(a), "+r"(b));
-  // shared_ptr<void> entity;
-  // Sheep(nullptr, mc->lvl);
+  shared_ptr<void *> str;
+  shared_ptr<void *> packet;
 
-  // asm volatile("_code_packet_:");
-  // shared_ptr<void> packet;
-  // packet.ptr = addEntityPacket(nullptr, entity, 0, 0);
-  //
-  // asm volatile("_code_send_:");
-  // mc->getConnection(0)->send(&packet);
+  shared_ptr<LocalPlayer> player;
+  mc->GetPlayerByPlayerIndex(1, &player);
+
+  giveCommand_preparePacket(&packet, &player, 1, 64 * 5 * 9, 3, &str);
+
+  mc->getConnection(0)->send(&packet);
 }
+*/

@@ -1,4 +1,7 @@
+// Copyright 2021 syoch. All rights reserved.
+
 #pragma once
+
 #include <inttypes.h>
 
 #include <cstddef>
@@ -24,14 +27,15 @@ void copy_data() {
       : "lr");
 
   // copy src to dest
-  memcpy(src, (uint32_t*)&rodata_start, (size_t)&rodata_size);
+  memcpy(src, static_cast<uint32_t*>(&rodata_start),
+         reinterpret_cast<size_t>(&rodata_size));
 }
 __attribute__((section(".startup"))) int startup() {
   // copy data
   // if constexpr (&rodata_start != &rodata_end) copy_data();
 
   asm volatile("_startup_main:");
-  code();
+  main();
   asm volatile("_startup_main_end:");
   return 0;
 }

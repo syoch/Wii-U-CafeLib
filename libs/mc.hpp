@@ -1,3 +1,7 @@
+// Copyright 2021 syoch. All rights reserved.
+
+#pragma once
+
 #include <code/rawFunc.hpp>
 
 #include "types.hpp"
@@ -27,8 +31,9 @@ class Player {};
 class LocalPlayer {};
 struct Level {
  public:
-  void destroyBlock(BlockPos &pos, int a) { destroyBlock_(this, pos, a); }
-  static rawFunc<void, 0x0254b014, Level *, BlockPos &, int> destroyBlock_;
+  void destroyBlock(BlockPos const &pos, int a) { destroyBlock_(this, pos, a); }
+  static rawFunc<void, 0x0254b014, Level *, BlockPos const &, int>
+      destroyBlock_;
 };
 struct Minecraft {
  public:
