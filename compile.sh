@@ -11,7 +11,7 @@ powerpc-eabi-gcc \
   -I . \
   raw.cpp \
   -Wl,-T,link.ld \
-  -o raw.o \
+  -o raw.o -std=c++2a \
 || exit
 powerpc-eabi-strip -N rodata_size raw.o 
 powerpc-eabi-strip -N Loop1 raw.o 

@@ -7,17 +7,25 @@
 #include <cstddef>
 
 extern "C" uint32_t rodata_end;
-struct {
-  uint8_t* allocator_ptr = nullptr;
-  void* operator()(size_t size) {
-    register uint8_t* ret = (uint8_t*)allocator_ptr;
-    allocator_ptr += 4;
-    return (void*)ret;
-  }
-} get_allocator_pointer;
 
-inline void* operator new(size_t size) {
-  return (void*)((int)&rodata_end + (int)get_allocator_pointer(size));
-}
+namespace code {
+
+struct Allocator {
+  uint8_t* addr;
+
+  explicit constexpr Allocator(uint8_t* addr) : addr(addr) {}
+
+  inline constexpr uint8_t* malloc(int n) {
+    auto ret = addr;
+    addr += n;
+    return ret;
+  }
+};
+
+Allocator allocator(reinterpret_cast<uint8_t*>(&rodata_end));
+inline constexpr uint8_t* malloc(int n) { return allocator.malloc(n); }
+}  // namespace code
+
+inline void* operator new(size_t size) { return code::allocator.malloc(size); }
 inline void* operator new[](size_t size) { return operator new(size); }
 inline void operator delete(void* ptr, size_t size) {}
