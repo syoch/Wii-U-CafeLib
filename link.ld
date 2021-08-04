@@ -18,6 +18,8 @@ SECTIONS{
     *(.rodata.*)
     *(.bss)
     *(.bss.*)
+    *(.sbss)
+    *(.sbss.*)
     rodata_end = .;
   } > ram,
   .text : 
