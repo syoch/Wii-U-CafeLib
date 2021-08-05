@@ -3,7 +3,7 @@
 #pragma once
 
 #include <cstddef>
-namespace code{
+namespace code {
 template <typename T>
 inline void memcpy(T* src, T* dest, const size_t count) {
   src--;
@@ -12,4 +12,4 @@ inline void memcpy(T* src, T* dest, const size_t count) {
     *(++dest) = *(++src);
   }
 }
-}
+}  // namespace code
