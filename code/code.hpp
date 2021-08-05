@@ -4,5 +4,6 @@
 
 #include "OSFuncs.hpp"
 #include "allocator.hpp"
+#include "follow_pointer.hpp"
 #include "rawFunc.hpp"
 #include "startup.hpp"
