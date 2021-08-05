@@ -3,6 +3,9 @@
 #include "code/code.hpp"
 
 inline void code_main() {
-  *(new int) = 1;
-  *(new int) = 1;
+  *(volatile uint32_t*)0xf0 = (uint32_t)code::allocate(4);
+  asm volatile("main0:");
+  *(volatile uint32_t*)0xf0 = (uint32_t)code::allocate(4);
+  asm volatile("main1:");
+  *(volatile uint32_t*)0xf0 = (uint32_t)code::allocate(4);
 }

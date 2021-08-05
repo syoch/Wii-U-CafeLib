@@ -36,12 +36,12 @@ cat text.bin data.bin > code.bin
 
 # print out data section
 echo "----- data section -----"
-hexdump \
+hexdump -v \
   -e '4/1 "%02x" " " 4/1 "%02x" "\n"' \
   data.bin
 
 # make hex
-hexdump \
+hexdump -v \
   -e '4/1 "%02x" " " 4/1 "%02x" "\n"' \
   code.bin > dump
 cat dump | xsel --clipboard --input

@@ -4,6 +4,7 @@
 
 #include <inttypes.h>
 
+namespace code {
 template <typename ret, uint32_t addr, typename... Args>
 class rawFunc {
  public:
@@ -11,3 +12,5 @@ class rawFunc {
     return ((ret(*)(Args...))(addr))(args...);
   }
 };
+
+}  // namespace code

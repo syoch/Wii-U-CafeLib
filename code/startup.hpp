@@ -6,14 +6,13 @@
 
 #include <cstddef>
 
+#include "common.hpp"
 #include "memcpy.hpp"
 
 void code_main();
 
-extern "C" {
-uint32_t rodata_size;
-uint32_t rodata_start;
-uint32_t rodata_end;
+namespace code {
+//! dont call this function!!!
 inline void copy_data() {
   register uint32_t* src;
 
@@ -30,13 +29,13 @@ inline void copy_data() {
   memcpy(src, static_cast<uint32_t*>(&rodata_start),
          reinterpret_cast<size_t>(&rodata_size));
 }
-__attribute__((section(".startup"))) int startup() {
-  // copy data
-  // if constexpr (&rodata_start != &rodata_end) copy_data();
+}  // namespace code
+
+extern "C" __attribute__((section(".startup"))) int startup() {
+  code::copy_data();
 
   asm volatile("_startup_main:");
   code_main();
   asm volatile("_startup_main_end:");
   return 0;
-}
 }

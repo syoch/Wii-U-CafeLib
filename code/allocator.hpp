@@ -5,27 +5,16 @@
 #include <inttypes.h>
 
 #include <cstddef>
+#include <type_traits>
+#include <vector>
 
-extern "C" uint32_t rodata_end;
+#include "common.hpp"
 
 namespace code {
+inline void* allocate(std::size_t size) {
+  auto ptr = allocator_pointer;
+  allocator_pointer += size;
+  return ptr;
+}
 
-struct Allocator {
-  uint8_t* addr;
-
-  explicit constexpr Allocator(uint8_t* addr) : addr(addr) {}
-
-  inline constexpr uint8_t* malloc(int n) {
-    auto ret = addr;
-    addr += n;
-    return ret;
-  }
-};
-
-Allocator allocator(reinterpret_cast<uint8_t*>(&rodata_end));
-inline constexpr uint8_t* malloc(int n) { return allocator.malloc(n); }
 }  // namespace code
-
-inline void* operator new(size_t size) { return code::allocator.malloc(size); }
-inline void* operator new[](size_t size) { return operator new(size); }
-inline void operator delete(void* ptr, size_t size) {}
