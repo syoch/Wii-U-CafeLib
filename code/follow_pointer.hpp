@@ -4,15 +4,6 @@
 
 #include <cinttypes>
 namespace code {
-template <typename T>
-class MemSetter {
- private:
-  uint32_t base;
-
- public:
-  explicit MemSetter(uint32_t base) : base(base) {}
-  void operator=(T val) { *(T*)(base) = val; }
-};
 
 class Mem {
  private:
@@ -26,8 +17,8 @@ class Mem {
   }
 
   template <typename T>
-  MemSetter<T> as() {
-    return MemSetter<T>(base);
+  T& as() {
+    return *reinterpret_cast<T*>(base);
   }
 };
 
