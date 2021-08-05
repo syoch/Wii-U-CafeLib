@@ -18,3 +18,7 @@ inline void* allocate(std::size_t size) {
 }
 
 }  // namespace code
+
+inline void* operator new(size_t size) { return code::allocate(size); }
+inline void* operator new[](size_t size) { return operator new(size); }
+inline void operator delete(void* ptr) {}
