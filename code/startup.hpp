@@ -32,7 +32,9 @@ inline void copy_data() {
 }  // namespace code
 
 extern "C" __attribute__((section(".startup"))) int startup() {
+#ifndef NO_DATA_COPY
   code::copy_data();
+#endif
 
   asm volatile("_startup_main:");
   code_main();
