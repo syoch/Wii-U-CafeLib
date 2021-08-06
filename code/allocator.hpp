@@ -26,9 +26,7 @@ namespace code {
  * @return void* アロケーターが確保したメモリのアドレス
  * @details
  * アロケーターが確保したメモリのアドレス(allocator_pointer)を返します。
- * @example
- *   int* ptr = (int*)allocator(sizeof(int));
- *   *ptr = 0;
+ * @example example_allocator.cpp
  */
 inline void* allocate(std::size_t size) {
   auto ptr = allocator_pointer;
