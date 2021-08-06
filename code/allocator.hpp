@@ -40,9 +40,7 @@ inline void* allocate(std::size_t size) {
  * @brief アロケーターへのラップ関数
  * @param[in] size アロケーターが確保するバイト単位でのサイズ
  * @return void* アロケーターが確保したメモリのアドレス
- * @example
- *   int* ptr = new int;
- *   *ptr= 1;
+ * @example example_operator_new.cpp
  */
 inline void* operator new(size_t size) { return code::allocate(size); }
 
@@ -50,10 +48,7 @@ inline void* operator new(size_t size) { return code::allocate(size); }
  * @brief アロケーターへの配列版ラップ関数
  * @param[in] size アロケーターが確保するバイト単位でのサイズ
  * @return void* アロケーターが確保したメモリのアドレス
- * @example
- *   int* ptr = new int[2];
- *   ptr[0]= 1;
- *   ptr[1]= 2;
+ * @example example_operator_new_array.cpp
  */
 inline void* operator new[](size_t size) { return operator new(size); }
 
@@ -61,7 +56,5 @@ inline void* operator new[](size_t size) { return operator new(size); }
  * @brief メモリ解放関数（未実装）
  * @param[in] ptr 開放するメモリへのポインタ
  * @return void
- *   int* ptr = new int;
- *   delete ptr;
  */
 inline void operator delete(void* ptr) {}
