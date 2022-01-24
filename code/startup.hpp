@@ -50,7 +50,7 @@ inline void copy_data() {
  * @return int 常に0です
  * @details 必要ならデータをコピーして、コード本体を実行します
  */
-extern "C" __attribute__((section(".startup"))) int _start() {
+extern "C" __attribute__((section(".startup"))) int startup() {
 #ifndef NO_DATA_COPY
   code::copy_data();
 #endif
