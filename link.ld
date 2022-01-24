@@ -8,14 +8,14 @@ MEMORY
 }
 
 SECTIONS{
-  
+
   .data :
   {
     allocator_pointer = .; . += 4;
     . += 0x4;
     . += 0x4;
     . += 0x4;
-    
+
 
     rodata_start = .;
     *(.sdata._ZZnwjE3ptr)
@@ -28,9 +28,9 @@ SECTIONS{
     *(.sbss.*)
     rodata_end = .;
   } > ram,
-  .text : 
+  .text :
   {
-    *(.startup) 
+    *(.startup)
     *(.text.*)
     text_end = .;
     rodata_size = (rodata_end - rodata_start)/4;

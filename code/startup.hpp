@@ -44,12 +44,13 @@ inline void copy_data() {
          reinterpret_cast<size_t>(&rodata_size));
 }
 }  // namespace code
+
 /**
  * @brief エントリポイントです
  * @return int 常に0です
  * @details 必要ならデータをコピーして、コード本体を実行します
  */
-extern "C" __attribute__((section(".startup"))) int startup() {
+extern "C" __attribute__((section(".startup"))) int _start() {
 #ifndef NO_DATA_COPY
   code::copy_data();
 #endif
