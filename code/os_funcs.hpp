@@ -13,8 +13,8 @@
 
 namespace code {
 namespace OSFuncs {
-FreeRawFunc<void, 0x0102A3B4> OSDynLoad_Acquire;
-FreeRawFunc<void, 0x0102B828> OSDynLoad_FindExport;
+FreeRawFunc<uint32_t, 0x0102A3B4> OSDynLoad_Acquire;
+FreeRawFunc<uint32_t, 0x0102B828> OSDynLoad_FindExport;
 
 }  // namespace OSFuncs
 }  // namespace code
