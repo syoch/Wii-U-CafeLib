@@ -30,4 +30,24 @@ class rawFunc {
   }
 };
 
+/**
+ * @brief 自由引数の関数ポインタラッパー
+ * @deprecated
+ * @details
+ * 関数ポインタラッパーは、関数ポインタをラップすることでソースコードの可視性を高めます
+ */
+template <typename ret, uint32_t addr>
+class FreeRawFunc {
+ public:
+  /**
+   * @brief ラップされてる関数ポインタを呼び出す関数です
+   * @param[in] args 引数リストです（可変長）
+   * @return ret 関数ポインタからの戻り値です
+   */
+  template <typename... Args>
+  inline constexpr ret operator()(Args... args) {
+    return ((ret(*)(Args...))(addr))(args...);
+  }
+};
+
 }  // namespace code
