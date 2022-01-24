@@ -124,7 +124,7 @@ def disassembly():
 def compile():
     options = []
     options += ["-nostdlib"]
-    options += ["-O3", "-fno-unroll-loops"]
+    options += ["-Os", "-fno-unroll-loops"]
     options += ["-Wall", "-Wno-register"]
     options += ["-ffunction-sections", "-Wl,--gc-sections"]
     options += ["-I", "."]
@@ -132,6 +132,8 @@ def compile():
     options += ["-o", "raw.o"]
     options += ["-std=c++2a"]
     options += ["raw.cpp"]
+
+    print(config["C++"] + " " + " ".join(options))
 
     ret = subprocess.call([config["C++"]] + options)
     if ret != 0:
