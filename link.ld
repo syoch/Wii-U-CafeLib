@@ -4,7 +4,8 @@ ENTRY(startup)
 MEMORY
 {
   rom(rxai) : ORIGIN = 0x02000000, LENGTH = 16m
-  ram(rwai) : ORIGIN = 0x10400000, LENGTH = 16m
+  ram(rwai) : ORIGIN = 0x10018000, LENGTH = 16m
+/* you can use 0x10400000 instead of ram's origin address */
 }
 
 SECTIONS{
@@ -28,6 +29,7 @@ SECTIONS{
     *(.sbss.*)
     rodata_end = .;
   } > ram,
+
   .text :
   {
     *(.startup)
