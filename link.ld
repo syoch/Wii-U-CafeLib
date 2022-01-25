@@ -22,6 +22,7 @@ SECTIONS{
     *(.sdata._ZZnwjE3ptr)
     *(.sdata)
     *(.sdata.*)
+    *(.rodata)
     *(.rodata.*)
     *(.bss)
     *(.bss.*)
