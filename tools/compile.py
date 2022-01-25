@@ -126,7 +126,7 @@ def compile():
     options += ["-nostdlib"]
     options += ["-Os", "-fno-unroll-loops"]
     options += ["-Wall", "-Wno-register"]
-    options += ["-ffunction-sections", "-Wl,--gc-sections"]
+    options += ["-fdata-sections", "-ffunction-sections", "-Wl,--gc-sections"]
     options += ["-I", "."]
     options += ["-Wl,-T,link.ld"]
     options += ["-o", "raw.o"]
