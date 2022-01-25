@@ -47,10 +47,10 @@ inline void copy_data() {
 
 /**
  * @brief エントリポイントです
- * @return int 常に0です
+ * @return void
  * @details 必要ならデータをコピーして、コード本体を実行します
  */
-extern "C" __attribute__((section(".startup"))) int startup() {
+extern "C" __attribute__((section(".startup"))) void startup() {
 #ifndef NO_DATA_COPY
   code::copy_data();
 #endif
@@ -58,5 +58,4 @@ extern "C" __attribute__((section(".startup"))) int startup() {
   asm volatile("_startup_main:");
   code_main();
   asm volatile("_startup_main_end:");
-  return 0;
 }
