@@ -19,12 +19,13 @@ class BlockPos {
   BlockPos(int _x, int _y, int _z) { ctor_(this, x, y, z); }
   uint32_t x, y, z;
 
-  static rawFunc<BlockPos *, 0x020c3ad4, BlockPos *, int, int, int> ctor_;
+  static code::rawFunc<BlockPos *, 0x020c3ad4, BlockPos *, int, int, int> ctor_;
 };
 class ClientPacketListener {
  public:
   void send(void *packet) {
-    rawFunc<void, 0x0304a5d8, ClientPacketListener *, void *>()(this, packet);
+    code::rawFunc<void, 0x0304a5d8, ClientPacketListener *, void *>()(this,
+                                                                      packet);
   }
 };
 class Player {};
@@ -32,7 +33,7 @@ class LocalPlayer {};
 struct Level {
  public:
   void destroyBlock(BlockPos const &pos, int a) { destroyBlock_(this, pos, a); }
-  static rawFunc<void, 0x0254b014, Level *, BlockPos const &, int>
+  static code::rawFunc<void, 0x0254b014, Level *, BlockPos const &, int>
       destroyBlock_;
 };
 struct Minecraft {
@@ -178,18 +179,18 @@ struct Minecraft {
   uint32_t field_0x25c;
   uint32_t field_0x260;
   uint32_t field_0x264;
-  static rawFunc<Minecraft *, 0x03166818> getInstance;
+  static code::rawFunc<Minecraft *, 0x03166818> getInstance;
   ClientPacketListener *getConnection(int i) {
-    return rawFunc<ClientPacketListener *, 0x031b2654, Minecraft *, int>()(this,
-                                                                           i);
+    return code::rawFunc<ClientPacketListener *, 0x031b2654, Minecraft *,
+                         int>()(this, i);
   }
   shared_ptr<LocalPlayer> *GetPlayerByPlayerIndex(
       int idx, shared_ptr<LocalPlayer> *dest = 0) {
-    return rawFunc<shared_ptr<LocalPlayer> *, 0x031b3644, Minecraft *,
-                   shared_ptr<LocalPlayer> *, int>()(this, dest, idx);
+    return code::rawFunc<shared_ptr<LocalPlayer> *, 0x031b3644, Minecraft *,
+                         shared_ptr<LocalPlayer> *, int>()(this, dest, idx);
   }
 };
 
-rawFunc<int, 0x02460e54, shared_ptr<void *> *, shared_ptr<LocalPlayer> *, int,
-        int, int, shared_ptr<void *> *>
+code::rawFunc<int, 0x02460e54, shared_ptr<void *> *, shared_ptr<LocalPlayer> *,
+              int, int, int, shared_ptr<void *> *>
     giveCommand_preparePacket;
