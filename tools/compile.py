@@ -124,7 +124,7 @@ def disassembly():
 def compile():
     options = []
     options += ["-nostdlib"]
-    options += ["-Os", "-fno-unroll-loops"]
+    options += ["-O3", "-fno-unroll-loops", "-finline"]
     options += ["-Wall", "-Wno-register"]
     options += ["-fdata-sections", "-ffunction-sections", "-Wl,--gc-sections"]
     options += ["-I", "."]
@@ -160,10 +160,10 @@ def make_code_bin():
         exit(1)
 
     with open("code.bin", "wb") as code_bin:
-        with open("text.bin", "rb") as text_bin:
-            code_bin.write(text_bin.read())
-        with open("data.bin", "rb") as data_bin:
-            code_bin.write(data_bin.read())
+        with open("text.bin", "rb") as fp:
+            code_bin.write(fp.read())
+        with open("data.bin", "rb") as fp:
+            code_bin.write(fp.read())
 
 
 def hex_dump(path, as_str=False):
