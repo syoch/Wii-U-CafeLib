@@ -109,18 +109,6 @@ def show_section_headers():
         print("objdump not found")
 
 
-def disassembly():
-    objdump = find_executable("powerpc-eabi-objdump")
-    if objdump:
-        print("----- disassembly -----")
-        ret = subprocess.call([objdump, "--disassemble", "raw.o"])
-        if ret != 0:
-            print("failed to disassemble")
-            exit(1)
-    else:
-        print("objdump not found")
-
-
 def compile():
     options = []
     options += ["-nostdlib"]
@@ -203,7 +191,6 @@ if __name__ == "__main__":
     strip()
     symbols()
     show_section_headers()
-    disassembly()
     make_code_bin()
     dump_data_section()
     dump()
