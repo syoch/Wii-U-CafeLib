@@ -1,0 +1,14 @@
+{
+  "saveAndRun": {
+    "commands": [
+      {
+        "cmd": "./entry.sh"
+      }
+    ]
+  },
+  "cSpell.words": [
+    "fdata",
+    "ffunction",
+    "nostdlib"
+  ]
+}
